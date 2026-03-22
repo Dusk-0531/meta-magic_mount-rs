@@ -10,6 +10,7 @@ use std::{
 };
 
 use anyhow::Result;
+use derivative::Derivative;
 use extattr::lgetxattr;
 use rustix::path::Arg;
 
@@ -37,14 +38,17 @@ impl From<FileType> for NodeFileType {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Derivative, Clone)]
+#[derivative(Debug)]
 pub struct Node {
     pub name: String,
     pub file_type: NodeFileType,
     pub children: HashMap<String, Self>,
     // the module that owned this node
     pub module_path: Option<PathBuf>,
+    #[derivative(Debug = "ignore")]
     pub replace: bool,
+    #[derivative(Debug = "ignore")]
     pub skip: bool,
 }
 
