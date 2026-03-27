@@ -12,8 +12,7 @@ use std::{
 
 use anyhow::{Context, Result, bail};
 use rustix::mount::{
-    MountFlags, MountPropagationFlags, mount, mount_bind, mount_change, mount_move,
-    mount_remount,
+    MountFlags, MountPropagationFlags, mount, mount_bind, mount_change, mount_move, mount_remount,
 };
 
 #[cfg(any(target_os = "linux", target_os = "android"))]

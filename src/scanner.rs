@@ -1,8 +1,15 @@
 // Copyright 2025 Magic Mount-rs Authors
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-use std::{collections::HashSet, fs, path::Path};
+use std::{
+    collections::{HashMap, HashSet},
+    fs,
+    io::Cursor,
+    path::Path,
+};
 
+use anyhow::Result;
+use java_properties::PropertiesIter;
 use serde::Serialize;
 
 use crate::{
@@ -21,15 +28,19 @@ pub struct ModuleInfo {
     skip: bool,
 }
 
-fn read_prop(vaule: &str, key: &str) -> Option<String> {
-    for line in vaule.lines() {
-        if line.starts_with(key)
-            && let Some((_, value)) = line.split_once('=')
-        {
-            return Some(value.trim().to_string());
-        }
-    }
-    None
+fn read_prop<P>(path: P) -> Result<HashMap<String, String>>
+where
+    P: AsRef<Path>,
+{
+    let buffer = fs::read_to_string(path)?;
+    let mut map = HashMap::new();
+    PropertiesIter::new_with_encoding(Cursor::new(buffer), encoding_rs::UTF_8).read_into(
+        |k, v| {
+            map.insert(k, v);
+        },
+    )?;
+
+    Ok(map)
 }
 
 /// Scans for modules that will be actually mounted by `magic_mount`.
@@ -80,23 +91,37 @@ where
 
             let prop_path = path.join("module.prop");
 
-            let Ok(prop) = fs::read_to_string(prop_path) else {
+            let Ok(prop) = read_prop(prop_path) else {
                 continue;
             };
-            let id = read_prop(&prop, "id").unwrap_or_else(|| "unknown".to_string());
-            let name = read_prop(&prop, "name").unwrap_or_else(|| id.clone());
-            let version = read_prop(&prop, "version").unwrap_or_else(|| "unknown".to_string());
-            let author = read_prop(&prop, "author").unwrap_or_else(|| "unknown".to_string());
-            let description =
-                read_prop(&prop, "description").unwrap_or_else(|| "unknown".to_string());
+            let Some(id) = prop.get("id") else {
+                log::warn!("{} missing module id", path.display());
+                continue;
+            };
+            let Some(name) = prop.get("name") else {
+                log::warn!("{} missing module name", path.display());
+                continue;
+            };
+            let Some(version) = prop.get("version") else {
+                log::warn!("{} missing module version", path.display());
+                continue;
+            };
+            let Some(author) = prop.get("author") else {
+                log::warn!("{} missing module author", path.display());
+                continue;
+            };
+            let Some(description) = prop.get("description") else {
+                log::warn!("{} missing module description", path.display());
+                continue;
+            };
 
-            if validate_module_id(&id).is_ok() {
+            if validate_module_id(id).is_ok() {
                 modules.push(ModuleInfo {
-                    id,
-                    name,
-                    version,
-                    author,
-                    description,
+                    id: id.clone(),
+                    name: name.clone(),
+                    version: version.clone(),
+                    author: author.clone(),
+                    description: description.clone(),
                     disabled,
                     skip,
                 });

@@ -115,7 +115,7 @@ fn main() -> Result<()> {
     );
 
     let cleanup = || {
-        use rustix::mount::{unmount, UnmountFlags};
+        use rustix::mount::{UnmountFlags, unmount};
         if let Err(e) = unmount(&tempdir, UnmountFlags::DETACH) {
             log::warn!("failed to unmount tempdir: {e}");
         }
