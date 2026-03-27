@@ -79,3 +79,12 @@ cargo xtask b
 
 * [GPL-3.0 license](https://www.gnu.org/licenses/gpl-3.0.html)
 
+## Star History
+
+<a href="https://www.star-history.com/?repos=Tools-cx-app%2Fmeta-magic_mount-rs&type=timeline&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=Tools-cx-app/meta-magic_mount-rs&type=timeline&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=Tools-cx-app/meta-magic_mount-rs&type=timeline&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/image?repos=Tools-cx-app/meta-magic_mount-rs&type=timeline&legend=top-left" />
+ </picture>
+</a>
