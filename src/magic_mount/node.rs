@@ -53,12 +53,15 @@ impl fmt::Debug for Node {
         self.debug_tree(f, 0)
     }
 }
-impl fmt::Display for Node {
+
+impl fmt::Display for NodeFileType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(
-            f,
-            "u need to send '/data/adb/magic_mount/tree' to developer "
-        )
+        f.write_str(match self {
+            Self::RegularFile => "RegularFile",
+            Self::Directory => "Directory",
+            Self::Symlink => "Symlink",
+            Self::Whiteout => "Whiteout",
+        })
     }
 }
 
@@ -66,7 +69,7 @@ impl Node {
     fn debug_tree(&self, f: &mut fmt::Formatter<'_>, indent: usize) -> fmt::Result {
         let indent_str = "  ".repeat(indent);
 
-        write!(f, "{}{} ({:?})", indent_str, self.name, self.file_type)?;
+        write!(f, "{}{} ({})", indent_str, self.name, self.file_type)?;
         if let Some(path) = &self.module_path {
             write!(f, " [{}]", path.display())?;
         }
