@@ -71,10 +71,10 @@ impl Node {
             write!(f, " [{}]", path.display())?;
         }
         if self.replace {
-            write!(f, " [R]")?;
+            write!(f, " [REPLACE]")?;
         }
         if self.skip {
-            write!(f, " [S]")?;
+            write!(f, " [SKIP]")?;
         }
         writeln!(f)?;
 
