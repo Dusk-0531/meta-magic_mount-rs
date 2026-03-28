@@ -136,6 +136,21 @@ export default function InfoTab() {
         <span class="app-version">{version()}</span>
       </div>
 
+      <div class="about-card">
+        <div class="about-title">{store.L.info.webuiTitle}</div>
+        <p class="about-text">{store.L.info.webuiDesc}</p>
+        <p class="about-link">
+          <a
+            href="https://kernelsu.org/guide/module-webui.html"
+            on:click={(e) =>
+              handleLink(e, "https://kernelsu.org/guide/module-webui.html")
+            }
+          >
+            {store.L.info.webuiGuideLink}
+          </a>
+        </p>
+      </div>
+
       <div class="action-buttons">
         <md-filled-tonal-button
           class="action-btn"
