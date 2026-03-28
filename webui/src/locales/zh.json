@@ -74,6 +74,8 @@
   "info": {
     "title": "关于项目",
     "projectLink": "项目地址",
+    "webuiGuide": "KernelSU WebUI 文档",
+    "templateRepo": "OukaroManager 模板",
     "donate": "捐赠支持",
     "contributors": "贡献者",
     "loading": "加载贡献者中...",

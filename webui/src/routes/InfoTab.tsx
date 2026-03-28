@@ -18,10 +18,12 @@ import "@material/web/icon/icon.js";
 import "@material/web/list/list.js";
 import "@material/web/list/list-item.js";
 
-const REPO_OWNER = "Tools-cx-app";
+const REPO_OWNER = "Dusk-0531";
 const REPO_NAME = "meta-magic_mount-rs";
 const CACHE_KEY = "mm_contributors_cache";
 const CACHE_DURATION = 1000 * 60 * 60;
+const KSU_WEBUI_GUIDE = "https://kernelsu.org/guide/module-webui.html";
+const OUKARO_TEMPLATE = "https://github.com/OukaroMF/OukaroManager";
 
 interface Contributor {
   login: string;
@@ -149,6 +151,28 @@ export default function InfoTab() {
             </svg>
           </md-icon>
           {store.L.info.projectLink}
+        </md-filled-tonal-button>
+        <md-filled-tonal-button
+          class="action-btn"
+          on:click={(e) => handleLink(e, KSU_WEBUI_GUIDE)}
+        >
+          <md-icon slot="icon">
+            <svg viewBox="0 0 24 24">
+              <path d={ICONS.ksu} />
+            </svg>
+          </md-icon>
+          {store.L.info.webuiGuide}
+        </md-filled-tonal-button>
+        <md-filled-tonal-button
+          class="action-btn"
+          on:click={(e) => handleLink(e, OUKARO_TEMPLATE)}
+        >
+          <md-icon slot="icon">
+            <svg viewBox="0 0 24 24">
+              <path d={ICONS.description} />
+            </svg>
+          </md-icon>
+          {store.L.info.templateRepo}
         </md-filled-tonal-button>
       </div>
 
