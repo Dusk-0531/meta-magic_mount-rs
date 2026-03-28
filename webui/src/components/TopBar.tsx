@@ -15,14 +15,13 @@ export default function TopBar() {
   const [showLangMenu, setShowLangMenu] = createSignal(false);
   let langButtonRef: HTMLButtonElement | undefined;
   let menuRef: HTMLDivElement | undefined;
-  const runtimeGlobal =
-    typeof window === "undefined"
-      ? null
-      : (window as unknown as Record<string, unknown>);
+  const windowWithKernelSU:
+    | (Window & { ksu?: unknown; kernelsu?: unknown })
+    | null = typeof window === "undefined" ? null : window;
   const hasKernelSuBridge = Boolean(
-    runtimeGlobal &&
-    (typeof runtimeGlobal.ksu !== "undefined" ||
-      typeof runtimeGlobal.kernelsu !== "undefined"),
+    windowWithKernelSU &&
+    (typeof windowWithKernelSU.ksu !== "undefined" ||
+      typeof windowWithKernelSU.kernelsu !== "undefined"),
   );
   const runtimeLabel = hasKernelSuBridge ? "KernelSU" : "Preview";
 

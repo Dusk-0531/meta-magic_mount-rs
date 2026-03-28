@@ -28,8 +28,9 @@
   position: relative;
 }
 .screen-title {
+  /* `flex-grow` moved to .top-title-wrap to allow badges below the title. */
   margin: 0;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 600;
   letter-spacing: 0;
   transform-origin: left bottom;
@@ -37,6 +38,7 @@
   white-space: nowrap;
 }
 .top-title-wrap {
+  /* Title and module badges share the same flexible column container. */
   flex-grow: 1;
   min-width: 0;
   display: flex;
