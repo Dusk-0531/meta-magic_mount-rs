@@ -11,6 +11,7 @@ import App from "./App";
 
 import "./app.css";
 import "./layout.css";
+import "./miuix.css";
 
 const root = document.querySelector("#app");
 
