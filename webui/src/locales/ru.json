@@ -76,6 +76,8 @@
   "info": {
     "title": "О нас",
     "projectLink": "Репозиторий",
+    "webuiGuide": "Руководство KernelSU WebUI",
+    "templateRepo": "Шаблон OukaroManager",
     "donate": "Поддержка",
     "contributors": "Контрибьюторы",
     "loading": "Загрузка контрибьюторов...",

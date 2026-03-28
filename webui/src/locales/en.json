@@ -76,6 +76,8 @@
   "info": {
     "title": "About",
     "projectLink": "Repository",
+    "webuiGuide": "KernelSU WebUI Guide",
+    "templateRepo": "OukaroManager Template",
     "donate": "Donate",
     "contributors": "Contributors",
     "loading": "Loading contributors...",

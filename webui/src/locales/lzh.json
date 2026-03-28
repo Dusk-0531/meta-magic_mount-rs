@@ -76,6 +76,8 @@
   "info": {
     "title": "識此工",
     "projectLink": "工之址",
+    "webuiGuide": "樞權網界之文",
+    "templateRepo": "OukaroManager 模板",
     "donate": "贊助以助",
     "contributors": "襄助者",
     "loading": "載襄助者中…",
