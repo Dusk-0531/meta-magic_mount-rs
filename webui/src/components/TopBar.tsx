@@ -15,6 +15,15 @@ export default function TopBar() {
   const [showLangMenu, setShowLangMenu] = createSignal(false);
   let langButtonRef: HTMLButtonElement | undefined;
   let menuRef: HTMLDivElement | undefined;
+  const windowWithKernelSU:
+    | (Window & { ksu?: unknown; kernelsu?: unknown })
+    | null = typeof window === "undefined" ? null : window;
+  const hasKernelSuBridge = Boolean(
+    windowWithKernelSU &&
+    (typeof windowWithKernelSU.ksu !== "undefined" ||
+      typeof windowWithKernelSU.kernelsu !== "undefined"),
+  );
+  const runtimeLabel = hasKernelSuBridge ? "KernelSU" : "Preview";
 
   function setLang(code: string) {
     store.setLang(code);
@@ -41,7 +50,13 @@ export default function TopBar() {
   return (
     <header class="top-bar">
       <div class="top-bar-content">
-        <h1 class="screen-title">{store.L.common.appName}</h1>
+        <div class="top-title-wrap">
+          <h1 class="screen-title">{store.L.common.appName}</h1>
+          <div class="meta-row">
+            <span class="meta-badge">Module WebUI</span>
+            <span class="meta-badge meta-badge-runtime">{runtimeLabel}</span>
+          </div>
+        </div>
         <div class="top-actions">
           <button
             class="btn-icon"
